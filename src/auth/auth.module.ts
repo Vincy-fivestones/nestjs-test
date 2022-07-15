@@ -7,15 +7,19 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { Bookmark } from './entities/bookmark.entity';
 import { User } from './entities/user.entity';
-
+import { JwtStratgey } from './strategy';
+import 'dotenv/config';
 @Module({
   imports: [
     UserModule,
     TypeOrmModule.forFeature([User, Bookmark]),
-    JwtModule.register({}),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET_KEY,
+      signOptions: { expiresIn: '15m' },
+    }),
     ConfigModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, JwtStratgey],
 })
 export class AuthModule {}

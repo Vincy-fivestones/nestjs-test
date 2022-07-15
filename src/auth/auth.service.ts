@@ -73,6 +73,8 @@ export class AuthService {
 
     const secret = this.config.get('JWT_SECRET_KEY');
 
+    //const secret = process.env.JWT_SECRET_KEY;
+
     // return this.jwt.signAsync(payload, {
     //   expiresIn: '15m', // need to re-login again after 15 mins
     //   secret: secret,
@@ -81,7 +83,9 @@ export class AuthService {
       expiresIn: '15m', // need to re-login again after 15 mins
       secret: secret,
     });
-
+    // const token = this.jwt.sign(
+    //   { expiresIn: '15m' }, // added days, default for ex 60 would be ms, you can also provide '1h' etc
+    // );
     return {
       accessToken: token,
     };
