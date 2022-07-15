@@ -1,6 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { AuthDto } from './dto';
 import { User } from './entities/user.entity';
@@ -11,7 +10,6 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UserService,
     @InjectRepository(User)
     private userRepository: Repository<User>,
     private jwt: JwtService,
